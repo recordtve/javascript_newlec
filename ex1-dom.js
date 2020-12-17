@@ -1,3 +1,112 @@
+//s10 갤러리 이벤트 다루기===========================================================
+window.addEventListener("load", function () {
+    var section = document.querySelector("#s10");
+    var prevButton = section.querySelector(".prev-button");
+    var nextButton = section.querySelector(".next-button");
+    var ul = section.querySelector("ul");
+    var img = section.querySelector(".show-room img");
+    var showRoom = section.querySelector(".show-room");
+    var showRoomImg = showRoom.firstElementChild;
+    
+    var current = ul.querySelector("li:nth-child(4)");
+    
+    //var left = "-100px";
+    var index = 0;
+    
+    //이벤트 버블링에 대한 문제와 해결 방법
+        showRoom.style.transition="500ms";
+        showRoom.onclick = function(e){
+            //if(조건에 맞으면)
+            //  e.stopPropagation();// 부모만 호출 자식은X
+            console.log("img의 부모 clicked")
+            showRoomImg.style.transform = "scale(1.2,1.2)";
+        };
+
+        showRoomImg.onclick = function(e) {
+            //e.stopPropagation();
+            //showRommImg.style.width = ""
+            console.log("img cliked")
+            e.target.style.transform = "scale(1.7,1.7)";
+        };
+    //하수를 면하는 방법
+    //ul>li>img => 부모 버블링
+    ul.onclick = function(e) {
+        //이미지가 아닐 경우
+        if(e.target.tagName != "IMG")
+            return;
+
+        current.classList.remove("current");
+        current = e.target.parentElement;
+        current.classList.add("current");
+        //현재 선택된 녀석
+        var newImg = current.firstElementChild;
+        showRoomImg.src = newImg.src;
+    };
+
+
+    // //가장 복잡하고 가장 바람직하지 않은 방법
+    // var imgs = section.querySelectorAll("ul img");
+    // for(var i=0; i<imgs.length; i++) 
+    // imgs[i].onclick = function(e) {
+
+    //     //console.log("test");
+    //     current.classList.remove("current");
+    //     current = e.target.parentElement;
+    //     current.classList.add("current");
+
+    //     //현재 선택된 녀석
+    //     var newImg = current.firstElementChild;
+    //     showRoomImg.src = newImg.src;
+        
+    // }
+
+    
+    prevButton.onclick = function () {
+        e.preventDefault();
+        if(current.previousElementSibling == null){
+            alert("이전 항목이 없습니다.");
+            return;
+        }
+
+        index--;
+        var x = index*100+"px";
+        ul.style.transform ="translateX("+x+")";
+
+        current.classList.remove("current");
+        current = current.previousElementSibling;
+        current.classList.add("current");
+        showRoomImg.src = current.firstElementChild.src;
+
+    };
+
+    nextButton.onclick = function() {
+        e.preventDefault();
+        
+        if(current.nextElementSibling == null){
+            alert("다음 항목이 없습니다.");
+            return;
+        }
+
+        index--;
+        var x = index*100+"px";
+        ul.style.transform ="translateX("+x+")";
+
+        current.classList.remove("current");
+        current = current.nextElementSibling;
+        current.classList.add("current");
+        showRoomImg.src = current.firstElementChild.src;
+        // current.style.opacity = "1";
+        // current.style.border = "1px solid green";
+        // current.style["border-width"] = "2px";
+        // current.style.borderColor = "red";
+
+        // opacity: 1;
+        // border: 1px solid green;
+    };
+
+});
+
+
 //s9===========================================================
 window.addEventListener("load", function(){
     var section = document.querySelector("#s9");
@@ -5,33 +114,118 @@ window.addEventListener("load", function(){
     var addButton = section.querySelector(".add-button");
     var delButton = section.querySelector(".del-button");
     var replaceButton = section.querySelector(".replace-button");
+    var changeButton = section.querySelector(".change-button");
 
     var index = 0;
 
+    changeButton.onclick = function() {
+        var chks = container.querySelectorAll("input[type=checkbox]:checked");
+       
+        for(var i=0; i<chks.length; i++) {
+            var parent = chks[i].parentElement;
+            var textSpan = parent.querySelector(".label");
+            textSpan.innerText = "바뀜";
+        }
+    }
+
+   
     addButton.onclick = function(){
-        // // 1. 텍스트 노드 생성
+
+        var item = '<span class="item"> \
+                        <input type="checkbox"> \
+                        <span class="label">안녕'+(index++)+'</span> \
+                    </span>';
+
+        container.insertAdjacentHTML('beforeend',item);
+       
+        
+        // 방법 1 : innerHTML 속성 사용하기
+        // - 꼼수로 해결한 방식
+
+        //  - 문제있는 방식
+//         var item = '<span class="item"> \
+//         <input type="checkbox"> \
+//         <span>안녕'+(index++)+'</span> \
+//       </span>';
+
+        // container.innerHTML += item;
+
+        // 1. 텍스트 노드 생성
         // var text = document.createTextNode("안녕!");
         // // 2. 컨테이너에 노드 추가
         // container.appendChild(text);
         //==============================================
         // 1. span 엘리먼트 객체 생성
-        var span = document.createElement("span");
-        // 2. 텍스트 노드 생성
-        index++;
-        var text = document.createTextNode("안녕!"+index);
+        //var span = document.createElement("span");
+        // 2. 텍스트 노드 생성``
+        //index++;
+        //var text = document.createTextNode("안녕!"+index);
         // 3. span에 2번에서 생성한 text객체를 추가하고
-        span.appendChild(text);
+        //span.appendChild(text);
         // 4. span 객체를 container에 추가한다.
-        container.appendChild(span);
+        //container.appendChild(span);
     };
 
     delButton.onclick = function(){
-        container.lastChild.remove();
+        //======선택 삭제 방식을 통한 구현
+        //- 선택된 노드 찾기
+        var chks = container.querySelectorAll("input[type=checkbox]:checked");
+        //for(var i in chks)  
+        //console.log(i) 
+        for(var i=0; i<chks.length; i++) 
+             chks[i].parentElement.remove();
+             console.log(chks[i]);
+                
+
+/*
+        //- 바람직하지 않은 방법
+        // 1. item 목록을 얻는다.
+       var items = container.children;
+        //2. item을 반복적으로 순회하면서 checkbox를 얻는다.
+        // for(var i=0; i<items.length; i++) {
+        //     var checkbox = items[i].querySelector("input[type=checkbox]")
+        // }
+        //3. checkbox의 상태가 선택되어 있는 것들을 추려서 array에 담는다
+        var chks = [];
+        for(var i=0; i<items.length; i++) {
+            //반복하기, 얻어오기, 조건검사하기
+            var checkbox = items[i].querySelector("input[type=checkbox]")
+            if(checkbox.checked)
+                chks.push(checkbox);
+        }
+
+        //4. console.log에 chks를 출력해보자
+        console.log(chks);
+*/
+
+        //============기본기능====================
+        //============= 새로운 기능으로 구현
+        //container.lastChild.remove();
         //=============이전 기능으로 구현
         //container.removeChild(container.lastElementChild);
     };
 
     replaceButton.onclick = function(){
+        //====선택된 항목 교체하기
+        var chks = container.querySelectorAll("input[type=checkbox]:checked");
+        
+        if(chks.length != 2) {
+            alert("2개가 선택되어야만 합니다")
+            return;
+
+        }
+
+        var item1 = chks[0].parentElement;
+        var item2 = chks[1].parentElement;
+        var before = item2.previousElementSibling;
+
+        //container.replaceChild(newOne, oldOne);
+        item1.replaceWith(item2);
+        before.insertAdjacentElement('afterend', item1);
+       
+
+               
+        /*
         //<첫 번째 / 막내 교환>
         //이렇게 하면 oldOne이 사라짐
         // var newOne = container.lastElementChild;
@@ -42,18 +236,24 @@ window.addEventListener("load", function(){
         // var oldOne = container.firstElementChild;
         // container.replaceChild(newOne, oldOne);
         // container.appendChild(oldOne);
+        */
 
         //=========================================
+        /*
         //<두번째 / 세번째 교환>
         var oldOne = container.children[1];
         var newOne = container.children[2];
         container.replaceChild(newOne, oldOne); // oldOne 사라짐
-        container.insertBefore(oldOne, newOne.nextElementSibling); //기준열 앞에 삽입,, next쓰면 다음이 없을 때 조건처리 해야함
+        //container.insertBefore(oldOne, newOne.nextElementSibling); //기준열 앞에 삽입,, next쓰면 다음이 없을 때 조건처리 해야함
+        newOne.insertAdjacentElement('afterend', oldOne);
+        // newOne.insertAdjacentHTML();
+        // newOne.insertAdjacentText();
+        */
     };
 });
 
 
-//s8===========================================================
+//s8 갤러리===========================================================
 window.addEventListener("load", function () {
     var section = document.querySelector("#s8");
     var prevButton = section.querySelector(".prev-button");

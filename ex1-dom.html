@@ -13,7 +13,6 @@
             background:white;
             boder-bottom
             opacity: 0.5;
-
             position: sticky;
             top:0px;        
             }
@@ -24,13 +23,112 @@
     <header>
         헤더입니다.
     </header>
-    <section id="s9">
-        <h1>노드 조작</h1>
+    <section id="s10">
+        <h1>이벤트 객체다루기 with 갤러리</h1>
         <style>
-            #s9 .container{
+            #s10 *{
+                box-sizing: border-box;
+            }
+            #s10 .cliper{
+                border: 1px solid gray;
+                width: 700px;
+                overflow: hidden;
+                position: relative;
+            }
+
+                
+            #s10 ul{
+                display: flex;
+                height: 100px;
+                padding: 0px;
+                transform: translate(-100px);
+                transition: transform 500ms ease-in-out;
+                
+                
+            }
+
+            #s10 ul li{
+                list-style-type: none;
+                overflow: hidden;
+                flex-basis: 100px;
+                flex-shrink: 0;
+                opacity: 0.5;
+            }
+
+            #s10 ul li.current {
+                opacity: 1;
+                border: 1px solid red;
+
+            }
+
+
+            #s10 .show-room{
                 width: 700px;
                 height: 300px;
                 border: 1px solid gray;
+                padding: 20px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #s10 .show-room img{
+                --position: static; /*위치가 정해져있다*/
+                --position: absolute;
+                --position: relative;
+                --position: fixed;
+                --position: sticky;
+                --left: 100px;
+                --top: 100px;
+
+            }
+        </style>
+        
+        <div>
+            <a class="prev-button" href="">이전</a>
+            <a class="next-button" href="">다음</a>
+        </div>
+
+
+        <div class="show-room">
+            <img src="../images/img4.jpg">
+        </div>
+        
+
+        <div class="cliper">
+        <ul>
+            <li class="current"><img src="../images/img1.jpg"></li>
+            <li><img src="../images/img2.jpg"></li>
+            <li><img src="../images/img3.jpg"></li>
+            <li><img src="../images/img4.jpg"></li>
+            <li class=><img src="../images/img5.jpg"></li>
+            <li><img src="../images/img1.jpg"></li>
+            <li><img src="../images/img2.jpg"></li>
+            <li><img src="../images/img3.jpg"></li>
+            <li><img src="../images/img4.jpg"></li>
+            <li><img src="../images/img5.jpg"></li>
+        </ul>
+    </div> 
+    </section>
+    
+    <hr>
+    <section id="s9">
+        <h1>노드 조작</h1>
+
+        <style>
+            #s9 .container{
+                width:700px;
+                height: 300px;
+                border:1px solid gray;
+                display: flex; 
+                flex-wrap: wrap;
+                align-content: flex-start;
+              
+            }
+
+            #s9 .item{
+                border:1px solid gray;
+                padding:5px;
             }
 
             #s9 .button-list{
@@ -38,25 +136,26 @@
             }
 
             #s9 .button{
-                border: 1px solid #797979;
+                border:1px solid #797979;
                 border-radius: 5px;
-                padding: 5px 10px;
+                padding:5px 10px;
                 vertical-align: middle;
                 cursor: pointer;
-
             }
 
             #s9 .button:hover{
                 background: lightgreen;
             }
-         </style>   
+
+        </style>
         <div class="container">
-            
+
         </div>
         <div class="button-list">
             <span class="button add-button">추가</span>
             <span class="button del-button">삭제</span>
-            <span class="button replace-button">변경</span>
+            <span class="button replace-button">바꾸기</span>
+            <span class="button change-button">텍스트변경</span>
         </div>
     </section>
 
@@ -225,7 +324,7 @@
             <input type="text" id="y-input">
             <input type="button" id="add-button" value="계산">
             <input type="text" id="result-input">
-        </fieldset>qewf
+        </fieldset>
     </form>
 
 </body>
