@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,122 +7,206 @@
     <script src="ex1-dom.js"></script>
     <style>
         header{
-            width:100%
+            width: 100%;
             height: 70px;
-            background:white;
-            boder-bottom
+            background: white;
+            border-bottom: 1px solid gray;
             opacity: 0.5;
             position: sticky;
-            top:0px;        
-            }
-    </style>    
-</head>
+            top:0px;
+        }        
 
+    </style>
+</head>
 <body>
     <header>
         헤더입니다.
     </header>
+    <section id="s13">
+        <style>
+            #s13 .container {
+                width: 500px;
+                height: 300px;
+                border: 1px solid gray;
+            }
+            #s13 .box{
+                position:absolute;
+                width: 100px;
+                height: 100px;
+                background: blue;
+            }
+        </style>
+        <h1>마우스 이벤트 : 드래그 드랍</h1>
+        <div class="container">
+            <div class="box"></div>
+        </div>
+    </section>
+       
+    <hr>
+    <section id="s12">
+        <style>
+            #s12 input{
+                display: none;
+            }
+        </style>
+        <hr>트리거</hr>
+        <div>
+            <input type="file">
+            <span class="file-button">파일선택</span>
+        </div>
+    </section>
+
+        <hr>
+        <section id="s11">
+        <h1>Ajax 다루기</h1>
+        
+        <div>
+            <input class="button1" type="button" value="로드">
+        </div>
+        <div >            
+            <table class="table"  border="1">
+               <thead>
+                  <tr>
+                     <th>번호</th>
+                     <th>제목</th>
+                     <th>작성자</th>
+                     <th>작성일</th>
+                     <th>조회수</th>
+                     <th>관리</th>                     
+                  </tr>
+               </thead>
+               <tbody>
+                     
+              <!--  <tr>
+                  <td>8</td>
+                  <td><a href="detail.html">스프링 8강까지의 예제 코드</a></td>
+                  <td>newlec</td>
+                  <td>
+                     2019-08-18      
+                  </td>
+                  <td>146</td>
+               </tr>           -->        
+         
+               
+               </tbody>
+            </table>
+         </div>
+         <div class="pager">
+         	<a href="?p=1">1</a>
+         	<a href="?p=2">2</a>
+         	<a href="?p=3">3</a>
+         	<a href="?p=4">4</a>
+         	<a href="?p=5">5</a>         	
+         </div>
+         
+
+
+    </section>
+
+
     <section id="s10">
-        <h1>이벤트 객체다루기 with 갤러리</h1>
+        <h1>이벤트 객체 + 갤러리</h1>
         <style>
             #s10 *{
                 box-sizing: border-box;
-            }
+            } 
             #s10 .cliper{
-                border: 1px solid gray;
+                border: 1px solid rgb(53, 187, 40);
                 width: 700px;
                 overflow: hidden;
                 position: relative;
             }
-
-                
             #s10 ul{
                 display: flex;
                 height: 100px;
                 padding: 0px;
-                transform: translate(-100px);
+
+                transform: translateX(0px);
                 transition: transform 500ms ease-in-out;
-                
-                
             }
-
             #s10 ul li{
-                list-style-type: none;
-                overflow: hidden;
+                list-style-type: none;               
                 flex-basis: 100px;
-                flex-shrink: 0;
+                overflow: hidden;
+                --display: inline;
+                flex-shrink:0;
                 opacity: 0.5;
+                /* display: flex;
+                flex-basis: 100px; */
             }
-
-            #s10 ul li.current {
+            #s10 .cliper img{
+                --object-fit: cover;
+                width: 100px;
+                height: 100px;
+            }
+            #s10 ul li.current{
                 opacity: 1;
-                border: 1px solid red;
-
+                border: 1px solid goldenrod;
             }
-
 
             #s10 .show-room{
                 width: 700px;
                 height: 300px;
+                border: 1px solid black;
+            }
+            #s10 .show-room{
+                width: 700px;
+                height: 300px;
                 border: 1px solid gray;
-                padding: 20px 0px;
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                align-items: center;   /* //align-self: 그 아이템에 정렬 */
+                padding: 20px 0px;
             }
-
             #s10 .show-room img{
-                --position: static; /*위치가 정해져있다*/
-                --position: absolute;
-                --position: relative;
-                --position: fixed;
-                --position: sticky;
-                --left: 100px;
-                --top: 100px;
 
+
+               /*  width: inherit;
+                height: calc(100%-8px);
+                object-fit: contain; */
             }
         </style>
-        
         <div>
             <a class="prev-button" href="">이전</a>
             <a class="next-button" href="">다음</a>
-        </div>
 
+            <!-- <input class="prev-button" type="button" value="prev">
+            <input class="next-button" type="button" value="next"> -->
+        </div>
 
         <div class="show-room">
-            <img src="../images/img4.jpg">
+            <img src="images/img4.jpg">
         </div>
-        
 
         <div class="cliper">
-        <ul>
-            <li class="current"><img src="../images/img1.jpg"></li>
-            <li><img src="../images/img2.jpg"></li>
-            <li><img src="../images/img3.jpg"></li>
-            <li><img src="../images/img4.jpg"></li>
-            <li class=><img src="../images/img5.jpg"></li>
-            <li><img src="../images/img1.jpg"></li>
-            <li><img src="../images/img2.jpg"></li>
-            <li><img src="../images/img3.jpg"></li>
-            <li><img src="../images/img4.jpg"></li>
-            <li><img src="../images/img5.jpg"></li>
-        </ul>
-    </div> 
+            <ul>
+                <li><img src="images/img1.jpg" ></li>
+                <li><img src="images/img2.jpg" ></li>
+                <li><img src="images/img3.jpg" ></li>
+                <li class="current"><img src="images/img4.jpg" ></li>
+                <li><img src="images/img5.jpg" ></li>
+                <li><img src="images/img1.jpg" ></li>
+                <li><img src="images/img2.jpg" ></li>
+                <li><img src="images/img3.jpg" ></li>
+                <li><img src="images/img4.jpg" ></li>
+                <li><img src="images/img5.jpg" ></li>
+            </ul>
+    </div>
     </section>
-    
-    <hr>
-    <section id="s9">
-        <h1>노드 조작</h1>
 
+
+    <section id="s9">
+        <h1>S9 노드 조작</h1>
         <style>
             #s9 .container{
                 width:700px;
                 height: 300px;
                 border:1px solid gray;
+
                 display: flex; 
                 flex-wrap: wrap;
-                align-content: flex-start;
-              
+                
+                align-items: flex-start;
             }
 
             #s9 .item{
@@ -146,10 +229,12 @@
             #s9 .button:hover{
                 background: lightgreen;
             }
-
         </style>
         <div class="container">
-
+            <!-- <span class="item">
+                <input type="checkbox">
+                <span>안녕1</span>
+            </span> -->
         </div>
         <div class="button-list">
             <span class="button add-button">추가</span>
@@ -159,98 +244,95 @@
         </div>
     </section>
 
-    <hr>    
     <section id="s8">
-        <h1>Gallery</h1>
+        <h1>S8 Gallery 노드 속성 변경</h1>
         <style>
             #s8 *{
                 box-sizing: border-box;
             }
             #s8 .cliper{
-                border: 1px solid gray;
+                border: 1px solid rgb(53, 187, 40);
                 width: 700px;
                 overflow: hidden;
                 position: relative;
             }
-
-                
             #s8 ul{
                 display: flex;
                 height: 100px;
                 padding: 0px;
-                transform: translate(-100px);
+
+                transform: translateX(0px);
                 transition: transform 500ms ease-in-out;
-                
-                
             }
-
             #s8 ul li{
-                list-style-type: none;
-                overflow: hidden;
+                list-style-type: none;               
                 flex-basis: 100px;
-                flex-shrink: 0;
+                overflow: hidden;
+                --display: inline;
+                flex-shrink:0;
                 opacity: 0.5;
+                /* display: flex;
+                flex-basis: 100px; */
             }
-
-            #s8 ul li.current {
+            #s8 .cliper img{
+                --object-fit: cover;
+                width: 100px;
+                height: 100px;
+            }
+            #s8 ul li.current{
                 opacity: 1;
-                border: 1px solid red;
-
+                border: 1px solid goldenrod;
             }
-
 
             #s8 .show-room{
                 width: 700px;
                 height: 300px;
+                border: 1px solid black;
+            }
+            #s8 .show-room{
+                width: 700px;
+                height: 300px;
                 border: 1px solid gray;
-                padding: 20px 0px;
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                align-items: center;   /* //align-self: 그 아이템에 정렬 */
+                padding: 20px 0px;
             }
-
             #s8 .show-room img{
-                --position: static; /*위치가 정해져있다*/
-                --position: absolute;
-                --position: relative;
-                --position: fixed;
-                --position: sticky;
-                --left: 100px;
-                --top: 100px;
 
+
+               /*  width: inherit;
+                height: calc(100%-8px);
+                object-fit: contain; */
             }
         </style>
-        
         <div>
             <input class="prev-button" type="button" value="prev">
             <input class="next-button" type="button" value="next">
         </div>
 
-
         <div class="show-room">
-            <img src="../images/img4.jpg">
+            <img src="images/img4.jpg">
         </div>
-        
 
         <div class="cliper">
-        <ul>
-            <li class="current"><img src="../images/img1.jpg"></li>
-            <li><img src="../images/img2.jpg"></li>
-            <li><img src="../images/img3.jpg"></li>
-            <li><img src="../images/img4.jpg"></li>
-            <li class=><img src="../images/img5.jpg"></li>
-            <li><img src="../images/img1.jpg"></li>
-            <li><img src="../images/img2.jpg"></li>
-            <li><img src="../images/img3.jpg"></li>
-            <li><img src="../images/img4.jpg"></li>
-            <li><img src="../images/img5.jpg"></li>
-        </ul>
+            <ul>
+                <li><img src="images/img1.jpg" ></li>
+                <li><img src="images/img2.jpg" ></li>
+                <li><img src="images/img3.jpg" ></li>
+                <li class="current"><img src="images/img4.jpg" ></li>
+                <li><img src="images/img5.jpg" ></li>
+                <li><img src="images/img1.jpg" ></li>
+                <li><img src="images/img2.jpg" ></li>
+                <li><img src="images/img3.jpg" ></li>
+                <li><img src="images/img4.jpg" ></li>
+                <li><img src="images/img5.jpg" ></li>
+            </ul>
     </div>
     </section>
 
-    <hr>
     <section id="s7">
-        <h1>Selectors API Level1</h1>
+        <h1>S7 Selectors API Level1</h1>
         <div>
             <input class="prev-button" type="button" value="prev">
             <input class="next-button" type="button" value="next">
@@ -264,9 +346,8 @@
         </ul>
     </section>
 
-    <hr>
     <section id="s6">
-        <h1>노드 순회</h1>
+        <h1>S6 노드 순회</h1>
         <div>
             <input class="prev-button" type="button" value="prev">
             <input class="next-button" type="button" value="next">
@@ -280,53 +361,51 @@
         </ul>
     </section>
 
-    <hr>
     <section id="s5">
         <h1>location</h1>
-        <input type="text" class="url-input">
-        <input type="button" class="button1" value="Go">
+        <input  class="url-input" type="text">
+        <input  class="button1" type="button" value="Go">
     </section>
 
-    <hr>
     <section id="s4">
         <h1>iframe 예제</h1>
         <style>
-            #s4 iframe {
+            #s4 iframe{
+                /* border: none; */
                 width: 500px;
-                height: 500px;
+                height: 300px;
+                
             }
+
         </style>
         <div>
             <input class="btn1" type="button" value="click">
-            <iframe src="ex1-zipcode.html" frameborder="1"></iframe>
+            <iframe src="ex1-zipcode.html" frameborder="0"></iframe>
         </div>
+
     </section>
 
-    <hr>
     <section id="s3">
-        <input class="zipcode-input" name="addr">
+        <input class=" zipcode-input" name="addr">
         <input class="search-button" type="button" value="주소검색">
     </section>
 
-    <hr>
-    <section id="s2">
+    <br>
+
+    <section id="s2">        
         <div>
             남은시간 <span class="count-span"></span>초
             <input name="countdown-button" type="button" value="카운트 시작" />
         </div>
     </section>
 
-    <hr>
     <form action="">
         <fieldset>
             <legend>계산기 폼</legend>
-            <input type="text" id="x-input">
-            <input type="text" id="y-input">
-            <input type="button" id="add-button" value="계산">
-            <input type="text" id="result-input">
+            <input type="text" id="x-input" >
+            <input type="text" id="y-input" >
+            <input type="button" id="add-button" value="계산" >
+            <input type="text" id="result-input" >
         </fieldset>
-    </form>
-
 </body>
-
 </html>
